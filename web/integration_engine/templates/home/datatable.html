@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/searchpanes/2.0.2/css/searchPanes.dataTables.min.css" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/select/1.4.0/css/select.dataTables.min.css" />
+	<link rel="stylesheet" href="{{url_for('static', filename='styles/fixed_asset.css')}}" />
+</head>
+
+<body>
+	<div>
+		<div class="row" style="padding: 20px">
+			<h1>Active Orders</h1>
+			<div class="container px-2 py-2">
+				<div class="container-fluid">
+					<div class="table-responsive">
+						<table class="table table-hover table-responsive" id="table_fixed_assets" cellspacing="0"
+							style="width: 100%">
+							<caption>
+								List of Orders
+							</caption>
+							<thead class="">
+								<tr class="align-center">
+									<th>CCN Order</th>
+									<th>Id Fixed Asset</th>
+									<th>Task</th>
+									<th>Description Status</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody class="table-group-divider">
+								{% for order in orders %} {% if order.3 != "FINISHED" %}
+								<tr>
+									<td>{{ order.0 }}</td>
+									<td>{{ order.1 }}</td>
+									<td>{{ order.2 }}</td>
+									<td>{{ order.3 }}</td>
+									<td>
+										{% if order.3 == "IN PROGRESS" %}
+										<a class="btn btn-success btn-sm"
+											href="/order_in_progress/{{order.1}}/{{order.0}}">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+												fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
+												<path
+													d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+											</svg>
+										</a>
+										{% else %}
+										<a class="btn btn-success btn-sm" href="/chancges_of_orders/{{ order.0 }}">
+											Start
+										</a>
+										{% endif %}
+									</td>
+								</tr>
+								{% endif %} {% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+	<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+	<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			var table = $("#table_fixed_assets").DataTable({
+				searchable: true,
+				fixedHeight: true,
+				responsive: true,
+				paging: true,
+				select: true,
+				autoFill: true,
+				dom: "lfrtipB",
+				buttons: [
+					{
+						extend: "excel",
+						footer: true,
+						title: "Archivo",
+						filename: "Export_File_xlxs",
+						text: '<button class="btn btn-light">Export to XLXS </button>',
+					},
+					{
+						extend: "pdf",
+						footer: true,
+						title: "PDF File",
+						filename: "Export_File_pdf",
+						text: '<button class="btn btn-light">Export to PDF</button>',
+					},
+					{
+						extend: "print",
+						footer: true,
+						title: "Print File",
+						filename: "Export_File_Print",
+						text: '<button class="btn btn-light">PRINT</button>',
+					},
+				],
+			});
+
+			new $.fn.dataTable.Responsive(table, {
+				details: false,
+			});
+
+			table
+				.buttons()
+				.container()
+				.appendTo($(".col-lg-3", table.table().container()));
+		});
+	</script>
+
+	<div>
+		<div class="row" style="padding: 20px">
+			<h1>Finalize orders</h1>
+			<div class="container px-2 py-2">
+				<div class="container-fluid">
+					<div class="table-responsive">
+						<table class="table table-hover table-responsive" id="table_service_order" cellspacing="0"
+							style="width: 100%">
+							<caption>
+								List of Orders
+							</caption>
+							<thead class="">
+								<tr class="align-center">
+									<th>CCN Order</th>
+									<th>Id Fixed Asset</th>
+									<th>Task</th>
+									<th>Description Status</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody class="table-group-divider">
+								{% for order in orders %}
+								<tr>
+									{% if order.3 == "FINISHED" %}
+									<td>{{ order.0 }}</td>
+									<td>{{ order.1 }}</td>
+									<td>{{ order.2 }}</td>
+									<td>{{ order.3 }}</td>
+									<td>
+										<a class="btn btn-success btn-sm"
+											href="/order_in_progress/{{order.1}}/{{order.0}}">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+												fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+												<path
+													d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+												<path
+													d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+											</svg>
+										</a>
+									</td>
+								</tr>
+								{% endif %} {% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(function () {
+			var table = $("#table_service_order").DataTable({
+				searchable: true,
+				fixedHeight: true,
+				responsive: true,
+				paging: true,
+				select: true,
+				autoFill: true,
+				dom: "lfrtipB",
+				buttons: [
+					{
+						extend: "excel",
+						footer: true,
+						title: "Archivo",
+						filename: "Export_File_xlxs",
+						text: '<button class="btn btn-light">Export to XLXS </button>',
+					},
+					{
+						extend: "pdf",
+						footer: true,
+						title: "PDF File",
+						filename: "Export_File_pdf",
+						text: '<button class="btn btn-light">Export to PDF</button>',
+					},
+					{
+						extend: "print",
+						footer: true,
+						title: "Print File",
+						filename: "Export_File_Print",
+						text: '<button class="btn btn-light">PRINT</button>',
+					},
+				],
+			});
+
+			new $.fn.dataTable.Responsive(table, {
+				details: false,
+			});
+
+			table
+				.buttons()
+				.container()
+				.appendTo($(".col-lg-3", table.table().container()));
+
+			deleteButton = document.querySelector("#Eliminacion");
+			deleteButton.onclick = function (e) {
+				e.preventDefault();
+				user_confirm = confirm(
+					"¿Está seguro que desea eliminar el registro?"
+				);
+				if (user_confirm) {
+					delete_url = deleteButton.getAttribute("href");
+					window.location.href = delete_url;
+				} else {
+					alert("La eliminación se ha cancelado");
+				}
+			};
+		});
+	</script>
+</body>
+
+</html>

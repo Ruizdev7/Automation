@@ -1,0 +1,33 @@
+{% extends "home/base_home.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="my-50" style="margin-top: 20px;">
+        <form class="row g-3" action="{{url_for('defined_codes.update_type_of_document',type_id=type_id) }}"
+            method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="col-md-6">
+                {{ form.description_type_id.label(class="text-dark") }}
+                {{ form.description_type_id(class="form-control",value=q.description_type_id) }}
+                {% for error in form.type_id.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-6">
+                <a class="btn btn-secondary" href="/list_type_of_document">Return</a>
+                {{ form.submit(class="btn btn-success",value="Update") }}
+                {% for error in form.submit.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="modal-footer">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio a repellendus molestias
+                    natus sapiente totam incidunt animi, nostrum enim necessitatibus alias fugit
+                    mollitia libero eos obcaecati, cupiditate adipisci possimus. Libero.</p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

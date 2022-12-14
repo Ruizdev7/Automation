@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  web:
+    
+    build: web
+    
+    restart: always
+    
+    ports:
+      - 5002:5002
+
+    networks:
+      - flask_network
+
+  proxy:
+    
+    build: proxy
+    
+    restart: unless-stopped
+    
+    ports:
+      # These ports are in format <host-port>:<container-port>
+      - '80:80' # Public HTTP Port
+      - '443:443' # Public HTTPS Port
+      - '81:81' # Admin Web Port
+    
+    networks:
+      - flask_network
+      # Uncomment this if IPv6 is not enabled on your host
+      # DISABLE_IPV6: 'true'
+
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+
+networks:
+  flask_network:

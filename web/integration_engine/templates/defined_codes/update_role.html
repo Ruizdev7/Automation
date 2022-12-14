@@ -1,0 +1,86 @@
+{% extends "home/base_home.html" %} {% block content %}
+
+<div class="container my-4">
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+        >
+          <strong>ROLE -> CARGO</strong>
+        </button>
+      </h2>
+      <div
+        id="collapseOne"
+        class="accordion-collapse collapse show"
+        aria-labelledby="headingOne"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="accordion-body">
+          <div class="container">
+            <div class="my-50" style="margin-top: 20px">
+              <form
+                class="row g-3"
+                action="{{url_for('defined_codes.update_role',ccn_role=ccn_role) }}"
+                method="POST"
+                enctype="multipart/form-data"
+              >
+                {{ form.hidden_tag() }}
+
+                <div class="col-md-6">
+                  {{ form.area.label(class="text-dark") }} {{
+                  form.area(class="form-control") }} {% for error in
+                  form.area.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+
+                <div class="col-md-8">
+                  {{ form.role.label(class="text-dark") }} {{
+                  form.role(class="form-control") }} {% for error in
+                  form.role.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+
+                <div class="col-md-12">
+                  {{ form.associated_process.label(class="text-dark") }} {{
+                  form.associated_process(class="form-control") }} {% for error
+                  in form.associated_process.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+
+                <div class="col-md-12">
+                  <a class="btn btn-sm btn-secondary" href="/defined_code_roles"
+                    >CANCELAR</a
+                  >
+                  {{ form.submit(class="btn btn-sm btn-success",
+                  value="ACTUALIZAR" ) }} {% for error in form.submit.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+
+                <div class="modal-footer">
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Odio a repellendus molestias natus sapiente totam incidunt
+                    animi, nostrum enim necessitatibus alias fugit mollitia
+                    libero eos obcaecati, cupiditate adipisci possimus. Libero.
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

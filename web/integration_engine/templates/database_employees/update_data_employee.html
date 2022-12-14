@@ -1,0 +1,160 @@
+{% extends "home/base_home.html" %}{% block content %}
+
+<div class="mx-auto mt-3 container-fluid bg-white">
+  <div class="row">
+    <div class="col-lg-3 border-right">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <img
+          class="mt-5"
+          width="250px"
+          src="../../static/images/employee_photos/{{ query_employee.image }}"
+        /><span class="font-weight-bold"
+          >{{ query_employee.full_name_employee }}</span
+        ><span class="text-black-50"
+          >{{ query_employee.employee_personal_email }}</span
+        ><span> </span>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="my-3">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4>UPDATE BASIC INFORMATION EMPLOYEE</h4>
+        </div>
+
+        <div class="container-fluid">
+          <div class="my-3">
+            <form
+              class="row g-1"
+              action="{{ url_for('db_employee.update_employee',ccn_employee=ccn_employee) }}"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+              {{ form.hidden_tag() }}
+
+              <div class="col-md-6 col-lg-6">
+                {{ form.ccn_type_id.label(class="mt-1") }} {{
+                form.ccn_type_id(class="form-control") }} {% for error in
+                form.ccn_type_id.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="col-md-6 col-lg-6">
+                {{ form.number_id_employee.label(class="mt-1") }} {{
+                form.number_id_employee(class="form-control") }} {% for error in
+                form.number_id_employee.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="col-md-12 col-lg-6">
+                {{ form.first_name_employee.label(class="mt-1") }} {{
+                form.first_name_employee(class="form-control") }} {% for error
+                in form.first_name_employee.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="col-md-12 col-lg-6">
+                {{ form.middle_name_employee.label(class="mt-1") }} {{
+                form.middle_name_employee(class="form-control") }} {% for error
+                in form.middle_name_employee.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="col-md-12 col-lg-6">
+                {{ form.first_last_name_employee.label(class="mt-1") }} {{
+                form.first_last_name_employee(class="form-control") }} {% for
+                error in form.first_last_name_employee.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="col-md-12 col-lg-6">
+                {{ form.second_last_name_employee.label(class="mt-1") }} {{
+                form.second_last_name_employee(class="form-control") }} {% for
+                error in form.second_last_name_employee.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="col-md-12 col-lg-3">
+                {{ form.date_birth_employee.label(class="mt-1") }} {{
+                form.date_birth_employee(class="form-control") }} {% for error
+                in form.date_birth_employee.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="col-md-12 col-lg-3">
+                {{ form.age_range.label(class="mt-1") }} {{
+                form.age_range(class="form-control") }} {% for error in
+                form.age_range.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="col-md-12 col-lg-3">
+                {{ form.auto_perceived_gender.label(class="mt-1") }} {{
+                form.auto_perceived_gender(class="form-control") }} {% for error
+                in form.auto_perceived_gender.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="col-md-12 col-lg-3">
+                {{ form.rh.label(class="mt-1") }} {{
+                form.rh(class="form-control") }} {% for error in form.rh.errors
+                %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="col-md-12 col-lg-6">
+                {{ form.employee_personal_email.label(class="mt-1") }} {{
+                form.employee_personal_email(class="form-control") }} {% for
+                error in form.employee_personal_email.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="col-md-12 col-lg-6">
+                {{ form.employee_personal_cellphone.label(class="mt-1") }} {{
+                form.employee_personal_cellphone(class="form-control") }} {% for
+                error in form.employee_personal_cellphone.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="col-md-12">
+                {{ form.img_employee.label(class="mt-1") }} {{
+                form.img_employee(class="form-control") }} {% for error in
+                form.img_employee.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="col-md-12 col-lg-12">
+                {{ form.employee_password.label(class="mt-1") }} {{
+                form.employee_password(class="form-control") }} {% for error in
+                form.employee_password.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="my-4 col-md-12 col-lg-6">
+                <a class="btn btn-secondary" href="/list_employee">Return</a>
+                {{ form.submit(class="btn btn-success",value="Update") }} {% for
+                error in form.submit.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+body {
+    background-color: #aeb6b3;
+}
+
+.Logo {
+    height: 130px;
+    width: 130px;
+    object-fit: cover;
+}
+
+.logocontainer {
+    margin-bottom: 10px;
+}
+
+.logocontainer div {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.linkRegistro {
+    font-weight: 300;
+    margin-top: 15px;
+}
+
+.linkRegistro p a {
+    font-weight: 400;
+    color: black;
+}
