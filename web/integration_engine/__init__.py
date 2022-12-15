@@ -34,13 +34,15 @@ def create_app(test_config=None):
     # Register BluePrints
 
     from integration_engine.views.home import blueprint_home
-    from integration_engine.views.db_employee import blueprint_db_employee
     from integration_engine.views.index import blueprint_landing_page
+    from integration_engine.views.db_employee import blueprint_db_employee
     from integration_engine.views.defined_codes import blueprint_defined_codes
+    from integration_engine.views.xlsx_processing import blueprint_xlsx_processing
 
+    app.register_blueprint(blueprint_home, url_prefix="")
     app.register_blueprint(blueprint_db_employee, url_prefix="")
     app.register_blueprint(blueprint_landing_page, url_prefix="")
-    app.register_blueprint(blueprint_home, url_prefix="")
     app.register_blueprint(blueprint_defined_codes, url_prefix="")
+    app.register_blueprint(blueprint_xlsx_processing, url_prefix="")
 
     return app

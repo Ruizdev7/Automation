@@ -1,0 +1,132 @@
+{% extends "home/base_home.html" %} {% block title %}{{ titulo }}{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='styles/xlsx_services.css')}}" />
+{{ super() }} {% endblock %}
+
+
+
+{% block content %}
+
+<main class="container-fluid">
+
+    <div class="container-fluid border p-5">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-4">
+                <div class="card text-start">
+                    <div class="card-header">
+                        <strong>
+                            MICC PRODUCTION PLANT REPORT
+                        </strong>
+                    </div>
+                    <div class="card-body align-items-start">
+                        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius amet veniam
+                            placeat! Suscipit sapiente perferendis sequi impedit quod ratione iusto ut distinctio
+                            temporibus, neque maxime, officiis, voluptatem sed soluta minima.</p>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#micc_production_plants_report">
+                            Launch static backdrop modal
+                        </button>
+                    </div>
+                    <div class="card-footer text-muted">
+                        2 days ago
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-4">
+                <div class="card text-start">
+                    <div class="card-header">
+                        <strong>
+                            MICC PRODUCTION PLANT REPORT
+                        </strong>
+                    </div>
+                    <div class="card-body align-items-start">
+                        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius amet veniam
+                            placeat! Suscipit sapiente perferendis sequi impedit quod ratione iusto ut distinctio
+                            temporibus, neque maxime, officiis, voluptatem sed soluta minima.</p>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#micc_mother_plants_report">
+                            Launch static backdrop modal
+                        </button>
+                    </div>
+                    <div class="card-footer text-muted">
+                        2 days ago
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-4">
+                <div class="card text-start">
+                    <div class="card-header">
+                        <strong>
+                            OTHER REPORT
+                        </strong>
+                    </div>
+                    <div class="card-body align-items-start">
+                        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius amet veniam
+                            placeat! Suscipit sapiente perferendis sequi impedit quod ratione iusto ut distinctio
+                            temporibus, neque maxime, officiis, voluptatem sed soluta minima.</p>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#micc_production_plants_report">
+                            Launch static backdrop modal
+                        </button>
+                    </div>
+                    <div class="card-footer text-muted">
+                        2 days ago
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="micc_production_plants_report" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">PRODUCTION</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="micc_mother_plants_report" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">MOTHER</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+
+
+{% endblock %}

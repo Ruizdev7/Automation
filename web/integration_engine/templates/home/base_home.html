@@ -26,55 +26,66 @@
 
 	<header>
 		<div class="icon__menu">
-			<img id="btn_open" src="../../static/images/servers-svgrepo-com.svg" alt="">
+			<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+				<div class="container-fluid">
+					<a class="navbar-brand mx-5" id="btn_open" href="#">Consola de
+						Administración del Motor de
+						Integracion</a>
+			</nav>
 		</div>
 	</header>
 
-	<div class="menu__side" id="menu_side">
-		<div class="name__page">
-			<img src="../../static/images/mj.png" alt="">
-			<h6>Integration Engine</h6>
+	<div class="container-fluid text-end">
+		<button class="btn btn-outline-warning" type="button" data-bs-toggle="offcanvas"
+			data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
+	</div>
+
+
+
+	<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+		<div class="offcanvas-header">
+			<h5 id="offcanvasRightLabel">Offcanvas right</h5>
+			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 		</div>
+		<div class="offcanvas-body">
+			...
+		</div>
+	</div>
+
+	<div class="menu__side" id="menu_side">
 		<div class="options__menu">
-			<a class="selected" href="#">
+			<a href="{{ url_for('home.home') }}">
 				<div class="option">
-					<img src="../../static/images/api-svgrepo-com.svg" title="Marketing CRM API" alt="">
 					<h6>Home</h6>
 				</div>
 			</a>
 			<a href="#">
 				<div class="option">
-					<img src="../../static/images/marketing-speaker-svgrepo-com.svg" title="Marketing CRM API" alt="">
 					<h6>Marketing CRM API</h6>
 				</div>
 			</a>
 			<a href="#">
 				<div class="option">
-					<img src="../../static/images/warehouse-svgrepo-com.svg" title="Public Inventory API" alt="">
 					<h6>Public Inventory API</h6>
 				</div>
 			</a>
 			<a href="#">
 				<div class="option">
-					<img src="../../static/images/marijuana-svgrepo-com.svg" title="Public Cultivation API" alt="">
 					<h6>Public Cultivation API</h6>
 				</div>
 			</a>
 			<a href="#">
 				<div class="option">
-					<img src="../../static/images/settings-svgrepo-com.svg" title="Public API Configuration" alt="">
 					<h6>Public API Configuration</h6>
 				</div>
 			</a>
 			<a href="#">
 				<div class="option">
-					<img src="../../static/images/side-view-truck-svgrepo-com.svg" title="Supply Chain API" alt="">
 					<h6>Supply Chain API</h6>
 				</div>
 			</a>
-			<a href="#">
+			<a href="{{ url_for('xlsx_processing.list_xlsx_services') }}">
 				<div class="option">
-					<img src="../../static/images/excel-svgrepo-com.svg" title="Supply Chain API" alt="">
 					<h6>Analysis and Processing of Files in Excel Format</h6>
 				</div>
 			</a>
